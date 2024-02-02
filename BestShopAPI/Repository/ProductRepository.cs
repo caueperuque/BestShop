@@ -55,9 +55,21 @@ namespace BestShopAPI.Repository
         {
             using (var sqlConnection = new SqlConnection(_connectionString))
             {
-                string sQuery = "SELECT * FROM Products";
+                var products = await sqlConnection.QueryAsync<Product>("SELECT * FROM Products");
+                var suppliers = await sqlConnection.QueryAsync<Supplier>("SELECT * FROM Suppliers");
 
-                var products = await sqlConnection.QueryAsync<Product>(sQuery);
+                foreach (var product in products)
+                {
+                    foreach (var supplier in suppliers)
+                    {
+                        if (product.SupplierId == supplier.SupplierId)
+                        {
+                            product.SupplierName = supplier.Name;
+                            break;
+                        }
+                    }
+                }
+
                 return products.ToList();
             }
         }

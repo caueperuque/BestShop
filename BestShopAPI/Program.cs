@@ -15,6 +15,10 @@ builder.Services.AddScoped<ISupplierService, SupplierService>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IBaseRepository, BaseRepository>();
+builder.Services.AddHttpClient();
+
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
 
 
 var app = builder.Build();

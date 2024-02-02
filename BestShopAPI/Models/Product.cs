@@ -21,5 +21,7 @@ namespace BestShopAPI.Models
         public int Quantity { get; set; }
 
         public int SupplierId { get; set; }
+
+        public string? SupplierName { get; set; }
     }
 }
